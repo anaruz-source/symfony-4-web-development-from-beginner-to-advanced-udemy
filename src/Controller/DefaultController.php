@@ -23,4 +23,28 @@ class DefaultController extends AbstractController
             'gifts' => $gifts->gifts,
         ]);
     }
+
+    /**
+     * @Route("/blog/{page?}", name="page", requirements={"page":"\d+"})
+     */
+    public function blog(): Response
+    {
+        return new Response('Optional parameters in url and requirements for parameters');
+    }
+
+    /**
+     * @Route(
+     * "/articles/{_locale}/{year}/{slug}/{category}",
+     * defaults={"category":"computers"},
+     * requirements={
+     *    "_locale":"en|fr",
+     *    "year":"\d+",
+     *    "category":"computers|rtv"
+     * }
+     * )
+     */
+    public function article(): Response
+    {
+        return new Response('An advanced Route Example!');
+    }
 }
