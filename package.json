@@ -1,0 +1,26 @@
+{
+  "name": "udemy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "custom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaruz-source/udemy-todolist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anaruz-source/udemy-todolist/issues"
+  },
+  "homepage": "https://github.com/anaruz-source/udemy-todolist#readme",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.5.0",
+    "webpack-notifier": "^1.13.0"
+  }
+}
