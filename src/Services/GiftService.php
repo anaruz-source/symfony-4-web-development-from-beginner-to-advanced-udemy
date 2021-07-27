@@ -10,6 +10,7 @@ class GiftService
 
     public function __construct(LoggerInterface $logger)
     {
+        shuffle($this->gifts);
         $logger->info('gift array were randomized');
     }
 }

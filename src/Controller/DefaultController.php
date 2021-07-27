@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\Usr;
 use App\Entity\Video;
 use App\Services\GiftService;
@@ -21,14 +22,14 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="home")
+     * @Route("/", name="home")
      */
-    public function index(GiftService $gifts, Usr $user): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/): Response
     {
-        dump($user);
-        $repo = $this->getDoctrine()->getRepository(Usr::class);
+        //dump($user);
+        $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
+        //$repoVideo = $this->getDoctrine()->getRepository(Video::class);
         $entityManager = $this->getDoctrine()->getManager();
-        $id = 1;
 
         // $user = $repo->find($id);
 
@@ -36,7 +37,7 @@ class DefaultController extends AbstractController
         //     throw $this->createNotFoundException('user with $id ='.$id.'not found');
         // }
 
-        // $user = $repo->find(1); //by id 1
+        $user = $repoUsr->find(1); //by id 1
         //  $user = $repo->findOneBy(['name' => 'name-0', 'id' => 1]); //by a field or many fields!
         // $users = $repo->findBy(['name' => 'name-0'], ['id' => 'DESC']);
 
@@ -52,37 +53,98 @@ class DefaultController extends AbstractController
         // $this->addFlash('notice', 'your changes were saved!');
         // $this->addFlash('warning', 'your changes were saved -warning classname!');
 
-        $conn = $entityManager->getConnection();
-        $sql = 'SELECT * FROM usr u WHERE u.id > :id';
+        // $conn = $entityManager->getConnection();
+        // $sql = 'SELECT * FROM usr u WHERE u.id > :id';
 
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(['id' => $id]);
+        // $stmt = $conn->prepare($sql);
+        // $stmt->execute(['id' => $id]);
 
-        $users = $stmt->fetchAll();
+        // $users = $stmt->fetchAll();
 
         // $user2 = new Usr();
         // $user2->setName('Robert');
         // $entityManager->persist($user2);
         // $entityManager->flush();
 
-        $user = new Usr();
-        $user->setName('Robert');
+        // $user = new Usr();
+        // $user->setName('Robert');
 
-        for ($i = 0; $i < 5; ++$i) {
-            $video = new Video();
-            $video->setTitle('video title.'.$id);
-            $user->addVideo($video);
-            $entityManager->persist($video);
-        }
+        // for ($i = 0; $i < 5; ++$i) {
+        //     $video = new Video();
+        //     $video->setTitle('video title.'.$i);
+        //     $user->addVideo($video);
+        //     $entityManager->persist($video);
+        // }
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        // $entityManager->persist($user);
+        // $entityManager->flush();
+
+        // $videos = $user->getVideos();
+        // $txt = '';
+        // foreach ($videos as $v) {
+        //     $txt .= $v->getTitle().'<br>';
+        // }
+
+        // exit($txt);
+
+        // $vid = $repoVideo->find(2);
+        // $user->removeVideo($vid);
+
+        // $entityManager->flush();
+
+        //  $video = $repoVideo->find(1);
+
+        // $newUser = new Usr();
+        // $newUser->setName('John');
+        // $address = new Address();
+        // $address->setStreet('Marche verte');
+        // $address->setNumber(34);
+        // $newUser->setAddress($address);
+
+        // $entityManager->persist($newUser);
+        // $entityManager->persist($address); // this will be used if cascade={"remove", "persist"}
+
+        // $usrs = ['Robert', 'John', 'Susan', 'Daniel'];
+        // foreach ($usrs as $u) {
+        //     $nUser = new Usr();
+        //     $nUser->setName($u);
+        //     $entityManager->persist($nUser);
+        // }
+
+        $user1 = $repoUsr->find(1);
+        // $user2 = $repoUsr->find(2);
+        // $user3 = $repoUsr->find(3);
+        // $user4 = $repoUsr->find(4);
+
+        // $user1->addFollowed($user2);
+        // $user1->addFollowed($user3);
+        // $user1->addFollowed($user4);
+
+        // $entityManager->flush();
+
+        // dump($user1);
+
+        // for ($i = 0; $i < 3; ++$i) {
+        //     $v = new Video();
+        //     $v->setTitle('video n° '.($i + 1));
+        //     $user1->addVideo($v);
+        //     $entityManager->persist($v);
+        // }
+
+        // $entityManager->persist($user1);
+
+        // $entityManager->flush();
+
+        // $userWvideos = $repoUsr->findWithVideos(1);
+
+        //  dump($userWvideos);
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
-            'users' => $users,
+            'users' => [],
             'gifts' => $gifts->gifts,
-            'user' => $user,
+            'user' => null,
+            //'video' => $video,
         ]);
     }
 

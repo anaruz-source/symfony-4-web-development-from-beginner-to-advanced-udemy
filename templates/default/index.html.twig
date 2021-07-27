@@ -93,6 +93,10 @@
 
            <h3>render mosts popular</h3>
           {{ render(controller('App\\Controller\\DefaultController::mostPopularBlogPosts', {'num' : 5}))}} {# param num overriteen 3 to 5 #}
+          <h3>Video Dumpping</h3>
+          <pre>
+            {{ dump(video.usr.name) }}
+          </pre>
 </div>
 
 {% endblock %}

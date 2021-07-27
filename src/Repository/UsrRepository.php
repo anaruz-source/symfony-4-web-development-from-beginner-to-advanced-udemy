@@ -47,4 +47,16 @@ class UsrRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findWithVideos($id): ?Usr
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.videos', 'v')
+            ->addSelect('v') // eager loading ????!!!!!!!! need to search what that is!!!
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
