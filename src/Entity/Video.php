@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PDFRepository::class)
+ * @ORM\Entity(repositoryClass=VideoRepository::class)
  */
 class Video extends File
 {

@@ -21,7 +21,7 @@ class InheritanceEntitiesFixtures extends Fixture
             $author = new Author();
             $author->setName($a);
 
-            for ($i = 0; $i < 3; ++$i) {
+            for ($i = 1; $i < 5; ++$i) {
                 $p = new Pdf();
                 $p->setFilename('file'.$i.'.pdf');
                 $p->setSize($i * 1200);
@@ -32,7 +32,7 @@ class InheritanceEntitiesFixtures extends Fixture
                 $manager->persist($p);
             }
 
-            for ($i = 0; $i < 2; ++$i) {
+            for ($i = 1; $i < 4; ++$i) {
                 $v = new Video();
                 $v->setFilename('video'.$i.'.pdf');
                 $v->setSize($i * 12000);
@@ -42,6 +42,8 @@ class InheritanceEntitiesFixtures extends Fixture
                 $v->setDuration(120 * $i);
                 $manager->persist($v);
             }
+
+            $manager->persist($author);
         }
         $manager->flush();
     }

@@ -47,4 +47,16 @@ class FileRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findPdfWithId($id)
+    {
+        return $this->createQueryBuilder('a')
+                    ->where('a.id = :id')
+                    ->setParameter('id', $id)
+                    ->innerJoin('a.files', 'f')
+                    ->andWhere('f INSTANCE OF App\Entity\Pdf')
+                    ->addSelect('f') // eager loading if commented pdfs will be lazy loaded!
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
 }

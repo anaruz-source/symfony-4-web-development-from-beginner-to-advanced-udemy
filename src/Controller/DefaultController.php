@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Author;
+use App\Entity\File;
 use App\Entity\Usr;
 use App\Entity\Video;
 use App\Services\GiftService;
+use App\Services\MyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +27,17 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, MyService $service): Response
     {
         //dump($user);
         $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
-        //$repoVideo = $this->getDoctrine()->getRepository(Video::class);
+        $repoVideo = $this->getDoctrine()->getRepository(File::class);
+        $repoAuth = $this->getDoctrine()->getRepository(Author::class);
+
         $entityManager = $this->getDoctrine()->getManager();
+
+        $service->dumpProps();
+        dump($service->argService->lazyLoaded());
 
         // $user = $repo->find($id);
 
@@ -91,8 +99,12 @@ class DefaultController extends AbstractController
         // $user->removeVideo($vid);
 
         // $entityManager->flush();
-
-        //  $video = $repoVideo->find(1);
+        $author = $repoAuth->find(1);
+        $user1 = $repoUsr->find(1);
+        $user1->setName('Robert');
+        $entityManager->persist($user1);
+        $entityManager->flush();
+        $video = $repoVideo->find(1);
 
         // $newUser = new Usr();
         // $newUser->setName('John');
@@ -111,7 +123,6 @@ class DefaultController extends AbstractController
         //     $entityManager->persist($nUser);
         // }
 
-        $user1 = $repoUsr->find(1);
         // $user2 = $repoUsr->find(2);
         // $user3 = $repoUsr->find(3);
         // $user4 = $repoUsr->find(4);
@@ -137,14 +148,16 @@ class DefaultController extends AbstractController
 
         // $userWvideos = $repoUsr->findWithVideos(1);
 
-        //  dump($userWvideos);
+        dump($author);
+        dump($user1);
+        dump($video->getAuthor()->getName());
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],
             'gifts' => $gifts->gifts,
             'user' => null,
-            //'video' => $video,
+            'video' => $video,
         ]);
     }
 
