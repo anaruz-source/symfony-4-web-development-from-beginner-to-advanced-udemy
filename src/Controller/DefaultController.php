@@ -8,7 +8,7 @@ use App\Entity\File;
 use App\Entity\Usr;
 use App\Entity\Video;
 use App\Services\GiftService;
-use App\Services\MyService;
+use App\Services\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, MyService $service): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service): Response
     {
         //dump($user);
         $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
@@ -36,8 +36,8 @@ class DefaultController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $service->dumpProps();
-        dump($service->argService->lazyLoaded());
+        // $service->dumpProps();
+        // dump($service->argService->lazyLoaded());
 
         // $user = $repo->find($id);
 

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class ParamService
+class ParamService implements ServiceInterface
 {
     public function __construct()
     {
