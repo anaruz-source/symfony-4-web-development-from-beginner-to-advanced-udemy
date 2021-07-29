@@ -7,11 +7,13 @@ use App\Entity\Author;
 use App\Entity\File;
 use App\Entity\Usr;
 use App\Entity\Video;
+use App\Events\VideoCreatedEvent;
 use App\Services\GiftService;
 use App\Services\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,17 +23,22 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends AbstractController
 {
-    public function __construct($logger)
+    private $dispatcher;
+
+    public function __construct($logger, EventDispatcherInterface $d)
     {
         // do somthing with logger!
+
+        $this->dispatcher = $d;
     }
 
     /**
-     * @Route("/", name="home")
+     * @Route("/index", name="home")
      */
     public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service): Response
     {
         //dump($user);
+
         $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
         $repoVideo = $this->getDoctrine()->getRepository(File::class);
         $repoAuth = $this->getDoctrine()->getRepository(Author::class);
@@ -171,55 +178,63 @@ class DefaultController extends AbstractController
         // $cache->deleteItem('database.get_posts'); // to clear one Item!
         // $cache->clear(); // to clear all!
 
-        $cache = new TagAwareAdapter(
-            new FilesystemAdapter()
-        );
+        // $cache = new TagAwareAdapter(
+        //     new FilesystemAdapter()
+        // );
 
-        $acer = $cache->getItem('acer');
-        $dell = $cache->getItem('dell');
-        $ibm = $cache->getItem('ibm');
-        $apple = $cache->getItem('apple');
+        // $acer = $cache->getItem('acer');
+        // $dell = $cache->getItem('dell');
+        // $ibm = $cache->getItem('ibm');
+        // $apple = $cache->getItem('apple');
 
-        if (!$acer->isHit()) { // cache not available!
-            $acer_from_db = 'acer laptop';
-            $acer->set($acer_from_db);
-            $acer->tag(['computers', 'laptops', 'acer']);
-            $cache->save($acer);
-            dump('acer laptop from database...');
-        }
+        // if (!$acer->isHit()) { // cache not available!
+        //     $acer_from_db = 'acer laptop';
+        //     $acer->set($acer_from_db);
+        //     $acer->tag(['computers', 'laptops', 'acer']);
+        //     $cache->save($acer);
+        //     dump('acer laptop from database...');
+        // }
 
-        if (!$dell->isHit()) { // cache not available!
-            $dell_from_db = 'dell laptop';
-            $dell->set($dell_from_db);
-            $dell->tag(['computers', 'laptops', 'dell']);
-            $cache->save($dell);
-            dump('dell laptop from database...');
-        }
+        // if (!$dell->isHit()) { // cache not available!
+        //     $dell_from_db = 'dell laptop';
+        //     $dell->set($dell_from_db);
+        //     $dell->tag(['computers', 'laptops', 'dell']);
+        //     $cache->save($dell);
+        //     dump('dell laptop from database...');
+        // }
 
-        if (!$ibm->isHit()) { // cache not available!
-            $ibm_from_db = 'Ibm desktop';
-            $ibm->set($ibm_from_db);
-            $ibm->tag(['computers', 'desktops', 'ibm']);
-            $cache->save($ibm);
-            dump('ibm desktop from database...');
-        }
+        // if (!$ibm->isHit()) { // cache not available!
+        //     $ibm_from_db = 'Ibm desktop';
+        //     $ibm->set($ibm_from_db);
+        //     $ibm->tag(['computers', 'desktops', 'ibm']);
+        //     $cache->save($ibm);
+        //     dump('ibm desktop from database...');
+        // }
 
-        if (!$apple->isHit()) { // cache not available!
-            $apple_from_db = 'apple desktop';
-            $apple->set($apple_from_db);
-            $apple->tag(['computers', 'desktops', 'apple']);
-            $cache->save($apple);
-            dump('apple desktop from database...');
-        }
+        // if (!$apple->isHit()) { // cache not available!
+        //     $apple_from_db = 'apple desktop';
+        //     $apple->set($apple_from_db);
+        //     $apple->tag(['computers', 'desktops', 'apple']);
+        //     $cache->save($apple);
+        //     dump('apple desktop from database...');
+        // }
 
-        dump($acer->get());
-        dump($dell->get());
-        dump($ibm->get());
-        dump($apple->get());
+        // dump($acer->get());
+        // dump($dell->get());
+        // dump($ibm->get());
+        // dump($apple->get());
 
         //$cache->invalidateTags(['ibm']); // ibm will go from cache
-        $cache->invalidateTags(['desktops']); // ibm and apple  will go from cache
+        //$cache->invalidateTags(['desktops']); // ibm and apple  will go from cache
         //$cache->invalidateTags(['computers']); // ibm and apple  will go from cache
+
+        $video = new \stdClass();
+        $video->title = 'Funny Movie';
+        $video->category = 'Funny';
+
+        $event = new VideoCreatedEvent($video);
+
+        $this->dispatcher->dispatch($event, 'video.created.event');
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',

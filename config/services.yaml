@@ -47,7 +47,11 @@ services:
             - {name: kernel.cache_clearer, event: clear}
 
     App\Services\ServiceInterface: '@App\Services\MyService1'
-    App\Services\KernelResponseListener:
-        tags:
-            - {name: kernel.event_listener, event: kernel.response}  # if onKernelResponse method is declared in KernetResponseListerner class
-            #- {name: kernel.event_listener, event: kernel.response, method: kernelResponse} # if kernelResponse method is declared (without On)
+    #App\Services\KernelResponseListener:
+        #tags:
+            #- {name: kernel.event_listener, event: kernel.response}  # if onKernelResponse method is declared in KernetResponseListerner class
+            #- {name: kernel.event_listener, event: kernel.response, method: kernelResponse} # if kernelResponse method is declared (without on)
+
+    # App\Listeners\VideoCreatedListener:
+    #     tags:
+    #         - {name: kernel.event_listener, event: video.created.event, method: videoCreated} # videoCreated method is declared (without on)
