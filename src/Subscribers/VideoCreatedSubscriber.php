@@ -3,8 +3,7 @@
 namespace App\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class VideoCreatedSubscriber implements EventSubscriberInterface
@@ -15,27 +14,25 @@ class VideoCreatedSubscriber implements EventSubscriberInterface
         dump('Subscriber called!');
     }
 
-    public function onKernelResponse1(ResponseEvent $event)
+    public function onKernelTerminate1(TerminateEvent $event)
     {
-        $response = new Response('Kernel event catched by Subscriber <br> onKernelEvent1 event executed');
-        dump('onKernelResponse1');
-        $event->setResponse($response);
+        return; // prevent dump to interere with form data
+        // dump('Kernel event catched by Subscriber <br> onKernelTerminate1 event executed');
     }
 
-    public function onKernelResponse2(ResponseEvent $event)
+    public function onKernelTerminate2(TerminateEvent $event)
     {
-        $response = new Response('Kernel event catched by Subscriber <br> onKernelEvent2 event executed');
-        dump('onKernelResponse2');
-        $event->setResponse($response);
+        return; // prevent dump to interere with form data
+        //dump('Kernel event catched by Subscriber <br> onKernelTerminate2 event executed');
     }
 
     public static function getSubscribedEvents()
     {
         return [
             'video.created.event' => 'onVideoCreatedEvent',
-            KernelEvents::RESPONSE => [
-                ['onKernelResponse2', 1],
-                ['onKernelResponse1', 2], ],
+            KernelEvents::TERMINATE => [
+                ['onKernelTerminate2', 1],
+                ['onKernelTerminate1', 2], ],
         ];
     }
 }

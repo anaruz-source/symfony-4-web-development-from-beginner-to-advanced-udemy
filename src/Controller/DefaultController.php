@@ -228,13 +228,13 @@ class DefaultController extends AbstractController
         //$cache->invalidateTags(['desktops']); // ibm and apple  will go from cache
         //$cache->invalidateTags(['computers']); // ibm and apple  will go from cache
 
-        $video = new \stdClass();
-        $video->title = 'Funny Movie';
-        $video->category = 'Funny';
+        // $video = new \stdClass();
+        // $video->title = 'Funny Movie';
+        // $video->category = 'Funny';
 
-        $event = new VideoCreatedEvent($video);
+        // $event = new VideoCreatedEvent($video);
 
-        $this->dispatcher->dispatch($event, 'video.created.event');
+        // $this->dispatcher->dispatch($event, 'video.created.event');
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
