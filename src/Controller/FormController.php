@@ -43,6 +43,7 @@ class FormController extends AbstractController
      */
     public function videoForm(Request $request): Response
     {
+        $manager = $this->getDoctrine()->getManager();
         /*
         *
         ***
@@ -63,17 +64,9 @@ class FormController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-
-            //return $this->redirectToRoute('index');
-        }
-
-        $form = $this->createForm(VideoFormType::class, $video);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            dump($video);
+            $manager->persist($video);
+            $manager->flush();
+            $this->redirectToRoute('home');
         }
 
         return $this->render('form/index.html.twig', [

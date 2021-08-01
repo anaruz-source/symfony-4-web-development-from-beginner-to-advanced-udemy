@@ -1,0 +1,81 @@
+composer/package-versions-deprecated 1.11.99.2 Composer plugin that provides efficient querying for installed package versions (no runtime IO)
+doctrine/annotations                 1.13.1    Docblock Annotations Parser
+doctrine/cache                       2.0.3     PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and oth...
+doctrine/collections                 1.6.7     PHP Doctrine Collections library that adds additional functionality on top of PHP arrays.
+doctrine/common                      3.1.2     PHP Doctrine Common project is a library that provides additional functionality that other Doctrine projects depend on such as better reflectio...
+doctrine/data-fixtures               1.5.0     Data Fixtures for all Doctrine Object Managers
+doctrine/dbal                        2.13.2    Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.
+doctrine/deprecations                v0.5.3    A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.
+doctrine/doctrine-bundle             2.4.2     Symfony DoctrineBundle
+doctrine/doctrine-fixtures-bundle    3.4.0     Symfony DoctrineFixturesBundle
+doctrine/doctrine-migrations-bundle  3.1.1     Symfony DoctrineMigrationsBundle
+doctrine/event-manager               1.1.1     The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.
+doctrine/inflector                   2.0.3     PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.
+doctrine/instantiator                1.4.0     A small, lightweight utility to instantiate objects in PHP without invoking their constructors
+doctrine/lexer                       1.2.1     PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.
+doctrine/migrations                  3.2.0     PHP Doctrine Migrations project offer additional functionality on top of the database abstraction layer (DBAL) for versioning your database sch...
+doctrine/orm                         2.9.3     Object-Relational-Mapper for PHP
+doctrine/persistence                 2.2.1     The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.
+doctrine/sql-formatter               1.1.1     a PHP SQL highlighting library
+friendsofphp/proxy-manager-lts       v1.0.5    Adding support for a wider range of PHP versions to ocramius/proxy-manager
+laminas/laminas-code                 4.4.2     Extensions to the PHP Reflection API, static code scanning, and code generation
+monolog/monolog                      2.3.0     Sends your logs to files, sockets, inboxes, databases and various web services
+nikic/php-parser                     v4.11.0   A PHP parser written in PHP
+psr/cache                            1.0.1     Common interface for caching libraries
+psr/container                        1.1.1     Common Container Interface (PHP FIG PSR-11)
+psr/event-dispatcher                 1.0.0     Standard interfaces for event handling.
+psr/log                              1.1.4     Common interface for logging libraries
+sensio/framework-extra-bundle        v6.1.5    This bundle provides a way to configure your controllers with annotations
+symfony/apache-pack                  v1.0.1    A pack for Apache support in Symfony
+symfony/asset                        v5.3.2    Manages URL generation and versioning of web assets such as CSS stylesheets, JavaScript files and image files
+symfony/cache                        v5.3.4    Provides an extended PSR-6, PSR-16 (and tags) implementation
+symfony/cache-contracts              v2.4.0    Generic abstractions related to caching
+symfony/config                       v5.3.3    Helps you find, load, combine, autofill and validate configuration values of any kind
+symfony/console                      v5.3.2    Eases the creation of beautiful and testable command line interfaces
+symfony/debug-bundle                 v5.3.4    Provides a tight integration of the Symfony Debug component into the Symfony full-stack framework
+symfony/dependency-injection         v5.3.3    Allows you to standardize and centralize the way objects are constructed in your application
+symfony/deprecation-contracts        v2.4.0    A generic function and convention to trigger deprecation notices
+symfony/doctrine-bridge              v5.3.3    Provides integration for Doctrine with various Symfony components
+symfony/dotenv                       v5.3.0    Registers environment variables from a .env file
+symfony/error-handler                v5.3.3    Provides tools to manage errors and ease debugging PHP code
+symfony/event-dispatcher             v5.3.0    Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
+symfony/event-dispatcher-contracts   v2.4.0    Generic abstractions related to dispatching event
+symfony/filesystem                   v5.3.3    Provides basic utilities for the filesystem
+symfony/finder                       v5.3.0    Finds files and directories via an intuitive fluent interface
+symfony/flex                         v1.13.3   Composer plugin for Symfony
+symfony/form                         v5.3.4    Allows to easily create, process and reuse HTML forms
+symfony/framework-bundle             v5.3.3    Provides a tight integration between Symfony components and the Symfony full-stack framework
+symfony/http-client-contracts        v2.4.0    Generic abstractions related to HTTP clients
+symfony/http-foundation              v5.3.3    Defines an object-oriented layer for the HTTP specification
+symfony/http-kernel                  v5.3.3    Provides a structured process for converting a Request into a Response
+symfony/maker-bundle                 v1.33.0   Symfony Maker helps you create empty commands, controllers, form classes, tests and more so you can forget about writing boilerplate code.
+symfony/monolog-bridge               v5.3.3    Provides integration for Monolog with various Symfony components
+symfony/monolog-bundle               v3.7.0    Symfony MonologBundle
+symfony/options-resolver             v5.3.0    Provides an improved replacement for the array_replace PHP function
+symfony/polyfill-intl-grapheme       v1.23.0   Symfony polyfill for intl's grapheme_* functions
+symfony/polyfill-intl-icu            v1.23.0   Symfony polyfill for intl's ICU-related data and classes
+symfony/polyfill-intl-normalizer     v1.23.0   Symfony polyfill for intl's Normalizer class and related functions
+symfony/polyfill-mbstring            v1.23.0   Symfony polyfill for the Mbstring extension
+symfony/polyfill-php73               v1.23.0   Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions
+symfony/polyfill-php80               v1.23.0   Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions
+symfony/polyfill-php81               v1.23.0   Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions
+symfony/property-access              v5.3.0    Provides functions to read and write from/to an object or array using a simple string notation
+symfony/property-info                v5.3.1    Extracts information about PHP class' properties using metadata of popular sources
+symfony/proxy-manager-bridge         v5.3.4    Provides integration for ProxyManager with various Symfony components
+symfony/requirements-checker         v2.0.0    Check Symfony requirements and give recommendations
+symfony/routing                      v5.3.0    Maps an HTTP request to a set of configuration variables
+symfony/runtime                      v5.3.3    Enables decoupling PHP applications from global state
+symfony/service-contracts            v2.4.0    Generic abstractions related to writing services
+symfony/stopwatch                    v5.3.0    Provides a way to profile code
+symfony/string                       v5.3.3    Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
+symfony/translation-contracts        v2.4.0    Generic abstractions related to translation
+symfony/twig-bridge                  v5.3.3    Provides integration for Twig with various Symfony components
+symfony/twig-bundle                  v5.3.3    Provides a tight integration of Twig into the Symfony full-stack framework
+symfony/validator                    v5.3.3    Provides tools to validate values
+symfony/var-dumper                   v5.3.3    Provides mechanisms for walking through any arbitrary PHP variable
+symfony/var-exporter                 v5.3.3    Allows exporting any serializable PHP data structure to plain PHP code
+symfony/web-profiler-bundle          v5.3.2    Provides a development tool that gives detailed information about the execution of any request
+symfony/webpack-encore-bundle        v1.12.0   Integration with your Symfony app & Webpack Encore!
+symfony/yaml                         v5.3.3    Loads and dumps YAML files
+twig/extra-bundle                    v3.3.1    A Symfony bundle for extra Twig extensions
+twig/twig                            v3.3.2    Twig, the flexible, fast, and secure template language for PHP

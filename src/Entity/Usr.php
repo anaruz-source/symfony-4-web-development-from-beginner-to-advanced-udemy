@@ -171,3 +171,5 @@ class Usr
         return $this;
     }
 }
+
+ // @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
