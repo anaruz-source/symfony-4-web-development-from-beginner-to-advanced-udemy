@@ -44,6 +44,8 @@ class FormController extends AbstractController
     public function videoForm(Request $request): Response
     {
         $manager = $this->getDoctrine()->getManager();
+
+        // $repo = $manager->getRepository(Video::class);
         /*
         *
         ***
@@ -59,11 +61,22 @@ class FormController extends AbstractController
         $video->setDuration(3600);
         $video->setCreatedAt(new \DateTime());
 
+        //$video = $repo->find(1);
+
         $form = $this->createForm(VideoFormType::class, $video);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('file')->getData();
+            $filename = sha1(random_bytes(14)).'.'.$file->guessExtension();
+
+            $file->move(
+                $this->getParameter('videos_dir'),
+                $filename
+            );
+
+            $video->setFilename($filename);
             $manager->persist($video);
             $manager->flush();
             $this->redirectToRoute('home');

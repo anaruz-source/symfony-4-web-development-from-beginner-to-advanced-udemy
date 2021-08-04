@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +32,15 @@ class Video extends File
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     * maxSize = "1024k",
+     * mimeTypes = {"video/mp4","application/pdf", "application/x-pdf"},
+     * mimeTypesMessage = "Please upload a valid PDF")
+     */
+    private $file;
 
     public function getUsr(): ?Usr
     {
@@ -76,6 +86,18 @@ class Video extends File
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

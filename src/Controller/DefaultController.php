@@ -35,17 +35,31 @@ class DefaultController extends AbstractController
     /**
      * @Route("/index", name="home")
      */
-    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport): Response
     {
+        $message = (new \Swift_Message('Hello example')) // email title
+                   ->setFrom('sender@example.com')
+                   ->setTo('recipient@example.com')
+                   ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig',
+                        ['name' => 'Robert']
+                    ),
+                    'text/html'
+                );
+
+        $mailer = new \Swift_Mailer($transport);
+
+        dump($mailer->send($message));
         //dump($user);
 
-        $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
-        $repoVideo = $this->getDoctrine()->getRepository(File::class);
-        $repoAuth = $this->getDoctrine()->getRepository(Author::class);
+        // $repoUsr = $this->getDoctrine()->getRepository(Usr::class);
+        // $repoVideo = $this->getDoctrine()->getRepository(File::class);
+        // $repoAuth = $this->getDoctrine()->getRepository(Author::class);
 
-        $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager = $this->getDoctrine()->getManager();
 
-        // $service->dumpProps();
+        // // $service->dumpProps();
         // dump($service->argService->lazyLoadcled());
 
         // $user = $repo->find($id);
@@ -54,7 +68,7 @@ class DefaultController extends AbstractController
         //     throw $this->createNotFoundException('user with $id ='.$id.'not found');
         // }
 
-        $user = $repoUsr->find(1); //by id 1
+        //$user = $repoUsr->find(1); //by id 1
         //  $user = $repo->findOneBy(['name' => 'name-0', 'id' => 1]); //by a field or many fields!
         // $users = $repo->findBy(['name' => 'name-0'], ['id' => 'DESC']);
 
@@ -108,12 +122,12 @@ class DefaultController extends AbstractController
         // $user->removeVideo($vid);
 
         // $entityManager->flush();
-        $author = $repoAuth->find(1);
-        $user1 = $repoUsr->find(1);
-        $user1->setName('Robert');
-        $entityManager->persist($user1);
-        $entityManager->flush();
-        $video = $repoVideo->find(1);
+        // $author = $repoAuth->find(1);
+        // $user1 = $repoUsr->find(1);
+        // $user1->setName('Robert');
+        // $entityManager->persist($user1);
+        // $entityManager->flush();
+        // $video = $repoVideo->find(1);
 
         // $newUser = new Usr();
         // $newUser->setName('John');
@@ -157,9 +171,9 @@ class DefaultController extends AbstractController
 
         // $userWvideos = $repoUsr->findWithVideos(1);
 
-        dump($author);
-        dump($user1);
-        dump($video->getAuthor()->getName());
+        // dump($author);
+        // dump($user1);
+        // dump($video->getAuthor()->getName());
 
         // composer require symfony/cache
 
@@ -228,9 +242,9 @@ class DefaultController extends AbstractController
         //$cache->invalidateTags(['desktops']); // ibm and apple  will go from cache
         //$cache->invalidateTags(['computers']); // ibm and apple  will go from cache
 
-        // $video = new \stdClass();
-        // $video->title = 'Funny Movie';
-        // $video->category = 'Funny';
+        $video = new \stdClass();
+        $video->title = 'Funny Movie';
+        $video->category = 'Funny';
 
         // $event = new VideoCreatedEvent($video);
 
