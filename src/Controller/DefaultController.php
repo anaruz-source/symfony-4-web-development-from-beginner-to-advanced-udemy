@@ -51,6 +51,7 @@ class DefaultController extends AbstractController
         $mailer = new \Swift_Mailer($transport);
 
         dump($mailer->send($message));
+
         //dump($user);
 
         // $repoUsr = $this->getDoctrine()->getRepository(Usr::class);

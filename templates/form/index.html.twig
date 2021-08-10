@@ -7,19 +7,8 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ form_type }}! ✅</h1>
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(form.format) }}
+    {{ form(form) }}
 
-    {{ form_row(form.duration) }}
-    {% if form.created_at is defined %}
-
-      {{ form_row(form.created_at) }}
-
-    {% endif %}
-
-
-
-{{ form_end(form) }}
 
 </div>
 {% endblock %}

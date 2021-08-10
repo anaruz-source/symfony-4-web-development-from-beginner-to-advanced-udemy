@@ -136,6 +136,18 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "sensiolabs/security-checker": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "160c9b600564faa1224e8f387d49ef13ceb8b793"
+        },
+        "files": [
+            "config/packages/security_checker.yaml"
+        ]
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.7"
     },
@@ -150,6 +162,9 @@
     },
     "symfony/asset": {
         "version": "v5.3.2"
+    },
+    "symfony/browser-kit": {
+        "version": "v5.3.4"
     },
     "symfony/cache": {
         "version": "v5.3.3"
@@ -193,6 +208,9 @@
     "symfony/doctrine-bridge": {
         "version": "v5.3.3"
     },
+    "symfony/dom-crawler": {
+        "version": "v5.3.4"
+    },
     "symfony/dotenv": {
         "version": "v5.3.0"
     },
@@ -204,6 +222,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v2.4.0"
+    },
+    "symfony/expression-language": {
+        "version": "v5.3.4"
     },
     "symfony/filesystem": {
         "version": "v5.3.3"
@@ -244,6 +265,9 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/http-client": {
+        "version": "v5.3.4"
     },
     "symfony/http-client-contracts": {
         "version": "v2.4.0"
@@ -289,6 +313,24 @@
     },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/password-hasher": {
+        "version": "v5.3.4"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "905679249e7b10f06c572917a9022a72cbfedc04"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.0"
@@ -350,6 +392,30 @@
     },
     "symfony/runtime": {
         "version": "v5.3.3"
+    },
+    "symfony/security-bundle": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "8b35bfc00a7716db4ca5a764a4b338476ca3a704"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
+    "symfony/security-core": {
+        "version": "v5.3.6"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.3.4"
+    },
+    "symfony/security-guard": {
+        "version": "v5.3.4"
+    },
+    "symfony/security-http": {
+        "version": "v5.3.6"
     },
     "symfony/service-contracts": {
         "version": "v2.4.0"

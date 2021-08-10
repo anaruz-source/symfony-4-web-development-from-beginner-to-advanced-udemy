@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\SecurityUser;
 use App\Entity\Video;
 use App\Form\ArticleType;
+use App\Form\RegisterUserType;
 use App\Form\VideoFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class FormController extends AbstractController
 {
@@ -85,6 +89,52 @@ class FormController extends AbstractController
         return $this->render('form/index.html.twig', [
             'form_type' => 'VideoTypeForm Form',
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/user/new", name="new-user")
+     */
+    public function newSecurityUser(Request $request, UserPasswordHasherInterface $hasher)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $repo = $manager->getRepository(SecurityUser::class);
+
+        dump($repo->findAll());
+
+        $user = new SecurityUser();
+        $form = $this->createForm(RegisterUserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $hasher->hashPassword($user, $form->get('password')->getData())
+            );
+
+            $user->setEmail($form->get('email')->getData());
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return  $this->redirectToRoute('home');
+        }
+
+        return $this->render('form/index.html.twig', [
+            'form_type' => 'SecurityUserTypeForm Form',
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $auth)
+    {
+        $error = $auth->getLastAuthenticationError();
+        $lastUsername = $auth->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 }

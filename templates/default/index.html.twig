@@ -95,8 +95,16 @@
           {{ render(controller('App\\Controller\\DefaultController::mostPopularBlogPosts', {'num' : 5}))}} {# param num overriteen 3 to 5 #}
           <h3>Video Dumpping</h3>
           <pre>
-            {{ dump(video.author.name) }}
+            {#{{ dump(video.author.name) }} commentted this out #}
           </pre>
+
+
+        {% if app.user %}
+          <h3>user is logged in system</h3>
+
+          <a href="{{path('logout')}}">Logout</a>
+
+        {% endif %}
 </div>
 
 {% endblock %}
