@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Entity\Author;
 use App\Entity\File;
+use App\Entity\SecurityUser;
 use App\Entity\Usr;
 use App\Entity\Video;
 use App\Events\VideoCreatedEvent;
 use App\Services\GiftService;
 use App\Services\ServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -32,25 +35,61 @@ class DefaultController extends AbstractController
         $this->dispatcher = $d;
     }
 
+    // we can use
+    // @Security("has_role('ROLE_ADMIN')")
+
     /**
-     * @Route("/index", name="home")
+     * @Route("/videos/delete/{id}", name="home")
+     * @Security("user.getId() == video.getSecurityUser().getId()")
      */
-    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport, UserPasswordHasherInterface $hasher, Video $video): Response
     {
-        $message = (new \Swift_Message('Hello example')) // email title
-                   ->setFrom('sender@example.com')
-                   ->setTo('recipient@example.com')
-                   ->setBody(
-                    $this->renderView(
-                        'emails/registration.html.twig',
-                        ['name' => 'Robert']
-                    ),
-                    'text/html'
-                );
+        $manager = $this->getDoctrine()->getManager();
 
-        $mailer = new \Swift_Mailer($transport);
+        $repo = $manager->getRepository(SecurityUser::class);
 
-        dump($mailer->send($message));
+        $users = $repo->findAll();
+
+        dump($users);
+        dump($video);
+        // $u = new SecurityUser();
+
+        // $u->setEmail('admin@mail.com');
+        // $u->setPassword($hasher->hashPassword($u, 'passw'));
+        // $u->setRoles(['ROLE_ADMIN']);
+
+        // $v = new Video();
+
+        // $v->setFile('file.mp4');
+        // $v->setFilename('file.mp4');
+        // $v->setDescription('file.mp4 file');
+        // $v->setDuration(1200);
+        // $v->setSize(8000);
+        // $v->setFormat('mpeg4');
+        // $v->setCreatedAt(new \DateTime());
+
+        // $manager->persist($v);
+        // $u->addVideo($v);
+
+        // $manager->persist($u);
+        // $manager->flush();
+        // dump($u->getId());
+        // dump($v->getId());
+
+        // $message = (new \Swift_Message('Hello example')) // email title
+        //            ->setFrom('sender@example.com')
+        //            ->setTo('recipient@example.com')
+        //            ->setBody(
+        //             $this->renderView(
+        //                 'emails/registration.html.twig',
+        //                 ['name' => 'Robert']
+        //             ),
+        //             'text/html'
+        //         );
+
+        // $mailer = new \Swift_Mailer($transport);
+
+        // dump($mailer->send($message));
 
         //dump($user);
 
@@ -243,10 +282,6 @@ class DefaultController extends AbstractController
         //$cache->invalidateTags(['desktops']); // ibm and apple  will go from cache
         //$cache->invalidateTags(['computers']); // ibm and apple  will go from cache
 
-        $video = new \stdClass();
-        $video->title = 'Funny Movie';
-        $video->category = 'Funny';
-
         // $event = new VideoCreatedEvent($video);
 
         // $this->dispatcher->dispatch($event, 'video.created.event');
@@ -256,7 +291,6 @@ class DefaultController extends AbstractController
             'users' => [],
             'gifts' => $gifts->gifts,
             'user' => null,
-            'video' => $video,
         ]);
     }
 

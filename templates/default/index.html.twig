@@ -77,9 +77,9 @@
         {{include('includes/subview.html.twig', users)}}
 
         <p>relative path is!:</p>
-         {{path('home')}} {#takes name of the route!#}
+         {{path('home',  { id: 1 })}} {#takes name of the route!#}
         <p>absolute path is!:</p>
-        {{url('home')}} {#takes name of the route!#}
+        {{url('home', {id:1})}} {#takes name of the route!#}
 
            <p>GA Code: <strong>{{ ga_code }}</strong></p>
            <p>assets!!!</p>
