@@ -105,6 +105,18 @@
           <a href="{{path('logout')}}">Logout</a>
 
         {% endif %}
+
+        {% if is_granted('ROLE_ADMIN')%}{#has ROLE_ADMIN #}
+
+        <p>This user has ROLE_ADMIN</p>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY')%}{#regardless of method#}
+          <p>This user IS_AUTHENTICATED_FULLY</p>
+        {% endif %}{#regardless of method#}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+
+        <p>This user IS_AUTHENTICATED_REMEMBERED</p>
+        {% endif %}
 </div>
 
 {% endblock %}

@@ -41,9 +41,9 @@ class DefaultController extends AbstractController
     // @Security("user.getId() == video.getSecurityUser().getId()")
 
     /**
-     * @Route("/admin/{id}", name="home")
+     * @Route("/index", name="home")
      */
-    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport, UserPasswordHasherInterface $hasher, Video $video): Response
+    public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport, UserPasswordHasherInterface $hasher /*, Video $video*/): Response
     {
         // For a specific usage for some routes:
         // logged using form
@@ -53,14 +53,14 @@ class DefaultController extends AbstractController
         // Logged already and has activated remember me in a previous loggin action
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        $manager = $this->getDoctrine()->getManager();
+        // $manager = $this->getDoctrine()->getManager();
 
-        $repo = $manager->getRepository(SecurityUser::class);
+        // $repo = $manager->getRepository(SecurityUser::class);
 
-        $users = $repo->findAll();
+        // $users = $repo->findAll();
 
-        dump($users);
-        dump($video);
+        // dump($users);
+        // dump($video);
         // $u = new SecurityUser();
 
         // $u->setEmail('admin@mail.com');
