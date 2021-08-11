@@ -10,7 +10,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
         </div>
     {% endif %}
 
@@ -21,7 +21,7 @@
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}">
-    <input type="hidden" name="_target_path"  value="home"> <!-- Route to route to if loggin is successful -->
+    <input type="hidden" name="_target_path"  value="/admin/1"> <!-- Route to route to if loggin is successful -->
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.

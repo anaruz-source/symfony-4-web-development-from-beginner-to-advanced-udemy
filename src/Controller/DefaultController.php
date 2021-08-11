@@ -37,13 +37,22 @@ class DefaultController extends AbstractController
 
     // we can use
     // @Security("has_role('ROLE_ADMIN')")
+    // or
+    // @Security("user.getId() == video.getSecurityUser().getId()")
 
     /**
-     * @Route("/videos/delete/{id}", name="home")
-     * @Security("user.getId() == video.getSecurityUser().getId()")
+     * @Route("/admin/{id}", name="home")
      */
     public function index(GiftService $gifts /*Usr $user* this is used for param converter*/, ServiceInterface $service, \Swift_Transport $transport, UserPasswordHasherInterface $hasher, Video $video): Response
     {
+        // For a specific usage for some routes:
+        // logged using form
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        // logged and has a ROLE_ADMIN
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // Logged already and has activated remember me in a previous loggin action
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
         $manager = $this->getDoctrine()->getManager();
 
         $repo = $manager->getRepository(SecurityUser::class);
