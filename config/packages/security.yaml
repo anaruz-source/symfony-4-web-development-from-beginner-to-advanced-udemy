@@ -1,6 +1,6 @@
 security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
-    enable_authenticator_manager: false
+    enable_authenticator_manager: true
     password_hashers:
         App\Entity\SecurityUser:
             algorithm: auto
@@ -25,7 +25,8 @@ security:
                 username_parameter: 'email'
                 password_parameter: 'password'
         # csrf_token_generator: security.csrf.token_manager
-                csrf_token_generator: security.csrf.token_manager
+                #csrf_token_generator: security.csrf.token_manager
+                enable_csrf: true # when enable_authenticator_manager: true, use enable_csrf: true
             logout:
                 path: /logout
                 target: /index
