@@ -119,6 +119,11 @@
         {% endif %}
 
         <a href="{{path('login')}}">awesome link</a>
+        {% trans %}
+            some.key
+        {% endtrans %}
+
+        {{'some.key'|trans|raw}}
 </div>
 
 {% endblock %}
